@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Fonts\Pacifico.ttf" />
+    <None Remove="Assets\Fonts\PlayfairDisplay-VariableFont_wght.ttf" />
+    <None Remove="Assets\RAW_recipes.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="33.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Fonts\Pacifico.ttf" />
+    <Resource Include="Assets\Fonts\PlayfairDisplay-VariableFont_wght.ttf" />
+    <Resource Include="Assets\RAW_recipes.csv" />
+  </ItemGroup>
+
+</Project>

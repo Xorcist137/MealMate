@@ -1,0 +1,60 @@
+﻿<Page x:Class="MealMate.Results" x:Name="ResultsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MealMate"
+      mc:Ignorable="d" 
+      d:DesignHeight="1920" d:DesignWidth="1080"
+      Title="Results">
+
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Breakfast" FontSize="36" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Arrow" FontFamily="/Assets/Fonts/#Pacifico"/>
+        <ScrollViewer Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="Breakfast_Recipes" Orientation="Horizontal"></StackPanel>
+            
+        </ScrollViewer>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Lunch" FontSize="36" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Arrow" FontFamily="/Assets/Fonts/#Pacifico"/>
+        <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="Lunch_Recipes" Orientation="Horizontal"></StackPanel>
+        </ScrollViewer>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Dinner" FontSize="36" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Arrow" FontFamily="/Assets/Fonts/#Pacifico"/>
+        <ScrollViewer Grid.Row="2" Grid.Column="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="Dinner_Recipes" Orientation="Horizontal"></StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Background="#B3A789" Margin="20,0,20,0">
+            <TextBlock Text="Current Meal Plan" FontSize="24" Margin="0,10,0,0" FontFamily="/Assets/Fonts/#Pacifico"/>
+            <Border BorderBrush="#FFA9896E" BorderThickness="5" CornerRadius="10" Margin="8" Height="175">
+                <Border.Background>
+                    <ImageBrush x:Name="BreakfastMeal" Stretch="UniformToFill" AlignmentY="Top"/>
+                </Border.Background>
+            </Border>
+            <Border BorderBrush="#FFA9896E" BorderThickness="5" CornerRadius="10" Margin="8" Height="175">
+               
+                <Border.Background>
+                    <ImageBrush x:Name="LunchMeal" Stretch="UniformToFill" AlignmentY="Top"/>
+                </Border.Background>
+            </Border>
+            <Border BorderBrush="#FFA9896E" BorderThickness="5" CornerRadius="10" Margin="8" Height="175">
+               
+                <Border.Background>
+                    <ImageBrush x:Name="DinnerMeal" Stretch="UniformToFill" AlignmentY="Top"/>
+                </Border.Background>
+            </Border>
+            <TextBlock FontSize ="20" Foreground="#111111"  Margin="20,0,0,0" FontFamily="/Assets/Fonts/#Playfair Display">Enter you meal plan's name:</TextBlock>
+            <TextBox FontSize ="20" x:Name="MealPlanName" BorderThickness="3" BorderBrush="SaddleBrown" Margin="20,0,20,10" Background="Transparent" FontFamily="/Assets/Fonts/#Playfair Display"/>
+            <Button Content="Save Meal Plan" Width="200" Click="SaveMealPlan_Click" FontSize ="24" FontFamily="/Assets/Fonts/#Playfair Display"/>
+        </StackPanel>
+    </Grid>
+</Page>

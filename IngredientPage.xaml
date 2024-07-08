@@ -1,0 +1,132 @@
+﻿<Page x:Class="MealMate.IngredientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MealMate"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="IngredientPage">
+    <Page.Resources>
+        <Style x:Key="HoverBorderStyle_Brown" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#FFA9896E"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF99795E"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HoverBorderStyle_Green" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#FF648A64"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF547A5A"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HoverBorderStyle_White" TargetType="Border">
+            <Setter Property="BorderBrush" Value="LightYellow"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FFEFEFD0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HoverBorderStyle_Gray" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#B9B9B9"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#A9A9A9"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Choose your ingredients" FontSize="36" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Foreground="#0A0909" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display"/>
+
+        <ScrollViewer Grid.Row="1" Margin="300,10,300,10">
+            <StackPanel Margin="10">
+                <StackPanel Margin="10">
+                    <Border Background="#FFA9896E" CornerRadius="15" BorderThickness="5" Margin="0,0,0,0" MouseLeftButtonDown="Category_Border_Click" Tag="GrainsAndBreads" Style="{StaticResource HoverBorderStyle_Brown}">
+                        <StackPanel Orientation="Horizontal" Height="80" Margin="0,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" Margin="20,0,0,0" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display">Grains and Breads</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="GrainsAndBreadsContent" Background="#FFD9B99E" Height="200" CornerRadius="0,0,15,15" BorderThickness="10" Visibility="Collapsed"></Border>
+                    <Border  Background="#FF648A64" CornerRadius="15" Margin="0,10,0,0" BorderThickness="5" Style="{StaticResource HoverBorderStyle_Green}" MouseLeftButtonDown="Category_Border_Click" Tag="Vegetables">
+                        <StackPanel Orientation="Horizontal" Height="80">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" Margin="20,0,0,0" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display">Vegetables</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="VegetablesContent" Background="#FFA4CAA4" Height="200" CornerRadius="0,0,15,15" BorderThickness="10" Visibility="Collapsed"></Border>
+                    <Border Background="LightYellow" CornerRadius="15" Margin="0,10,0,0" BorderThickness="5" Style="{StaticResource HoverBorderStyle_White}" MouseLeftButtonDown="Category_Border_Click" Tag="Dairy">
+                        <StackPanel Orientation="Horizontal" Height="80">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" Margin="20,0,0,0" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display">Dairy</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="DairyContent" Background="#FFFFFFF0" Height="200" CornerRadius="0,0,15,15" BorderThickness="10" Visibility="Collapsed"></Border>
+
+                    <Border Background="#FFA9896E" CornerRadius="15" Margin="0,10,0,0" BorderThickness="5" Style="{StaticResource HoverBorderStyle_Brown}" MouseLeftButtonDown="Category_Border_Click" Tag="Protein">
+                        <StackPanel Orientation="Horizontal" Height="80">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" Margin="20,0,0,0" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display">Protein</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="ProteinContent" Background="#FFD9B99E" Height="200" CornerRadius="0,0,15,15" BorderThickness="10" Visibility="Collapsed"></Border>
+
+                    <Border Background="#FF648A64" CornerRadius="15" Margin="0,10,0,0" BorderThickness="5" Style="{StaticResource HoverBorderStyle_Green}" MouseLeftButtonDown="Category_Border_Click" Tag="Fruits">
+                        <StackPanel Orientation="Horizontal" Height="80">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" Margin="20,0,0,0" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display">Fruits</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="FruitsContent" Background="#FFA4CAA4" Height="200" CornerRadius="0,0,15,15" BorderThickness="10" Visibility="Collapsed"></Border>
+
+                    <Border Background="LightYellow" CornerRadius="15" Margin="0,10,0,0" BorderThickness="5" Style="{StaticResource HoverBorderStyle_White}" MouseLeftButtonDown="Category_Border_Click" Tag="SpicesAndSeasonings">
+                        <StackPanel Orientation="Horizontal" Height="80">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" Margin="20,0,0,0" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display">Spices and Seasonings</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="SpicesAndSeasoningsContent" Background="#FFFFFFF0" Height="200" CornerRadius="0,0,15,15" BorderThickness="10" Visibility="Collapsed"></Border>
+
+                    <Border Background="#FFA9896E" CornerRadius="15" Margin="0,10,0,0" BorderThickness="5" Style="{StaticResource HoverBorderStyle_Brown}" MouseLeftButtonDown="Category_Border_Click" Tag="OilsAndFats">
+                        <StackPanel Orientation="Horizontal" Height="80">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" Margin="20,0,0,0" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display">Oils and Fats</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="OilsAndFatsContent" Background="#FFD9B99E" Height="200" CornerRadius="0,0,15,15" BorderThickness="10" Visibility="Collapsed"></Border>
+
+                    <Border Background="#FF648A64" CornerRadius="15" Margin="0,10,0,0" BorderThickness="5" Style="{StaticResource HoverBorderStyle_Green}" MouseLeftButtonDown="Category_Border_Click" Tag="Condiments">
+                        <StackPanel Orientation="Horizontal" Height="80">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" Margin="20,0,0,0" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display">Condiments</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="CondimentsContent" Background="#FFA4CAA4" Height="200" CornerRadius="0,0,15,15" BorderThickness="10" Visibility="Collapsed"></Border>
+
+                    <Border Background="LightYellow" CornerRadius="15" Margin="0,10,0,0" BorderThickness="5" Style="{StaticResource HoverBorderStyle_White}" MouseLeftButtonDown="Category_Border_Click" Tag="NutsAndSeeds">
+                        <StackPanel Orientation="Horizontal" Height="80">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" Margin="20,0,0,0" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display">Nuts and Seeds</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="NutsAndSeedsContent" Background="#FFFFFFF0" Height="200" CornerRadius="0,0,15,15" BorderThickness="10" Visibility="Collapsed"></Border>
+
+                    <Border Background="#FFA9896E" CornerRadius="15" Margin="0,10,0,0" BorderThickness="5" Style="{StaticResource HoverBorderStyle_Brown}" MouseLeftButtonDown="Category_Border_Click" Tag="Miscellaneous">
+                        <StackPanel Orientation="Horizontal" Height="80">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" Margin="20,0,0,0" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display">Miscellaneous</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="MiscellaneousContent" Background="#FFD9B99E" Height="200" CornerRadius="0,0,15,15" BorderThickness="10" Visibility="Collapsed"></Border>
+
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" Width="400" Height="100" Background="#D9D9D9" BorderThickness="10" Style="{StaticResource HoverBorderStyle_Gray}" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="15" MouseLeftButtonDown="FindMealPlansButton_Click">
+            <TextBlock Text="Find Meal Plans" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontFamily="/Assets/Fonts/#Playfair Display" FontWeight="Bold"/>
+        </Border>
+    </Grid>
+</Page>

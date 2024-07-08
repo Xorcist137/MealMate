@@ -1,0 +1,67 @@
+﻿<Window x:Class="MealMate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MealMate"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1920">
+    <Window.Resources>
+        <Style x:Key="HoverBorderStyle_Brown" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#FFA9896E"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF99795E"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HoverBorderStyle_Green" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#FF648A64"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF547A5A"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HoverBorderStyle_White" TargetType="Border">
+            <Setter Property="BorderBrush" Value="LightYellow"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FFEFEFD0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HoverBorderStyle_Gray" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#B9B9B9"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#A9A9A9"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="11*"/>
+
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Border Background="#E3D7B9" Grid.Row="0" Grid.RowSpan="4"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Grid.Row="0" Text="MealMate" FontSize="48" Margin="20,0,1360,0" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="Hand" FontFamily="/Assets/Fonts/#Pacifico" Foreground="#FFF03B00" MouseLeftButtonDown="Navigate_Home"/>
+            <Border x:Name="MealPlansBorder" Style="{StaticResource HoverBorderStyle_Brown}" BorderThickness="10" CornerRadius="15" Margin="20" HorizontalAlignment="Right" Cursor="Hand" MouseLeftButtonDown="Navigate_MyMealPlans">
+                <TextBlock Padding ="14" Text="My Meal Plans" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Foreground="#FFF03B00" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display" Height="82"/>
+            </Border>
+        </StackPanel>
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+        <Border Grid.Row="2" Background="#D5E0D2"></Border>
+
+        <TextBlock Grid.Row="2" FontSize="24" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center" Foreground="DarkGreen" Cursor="Hand" MouseLeftButtonDown="Exit_Click" >Exit</TextBlock>
+        <TextBlock Grid.Row="2" FontSize="24" Foreground="DarkGreen" Margin="20,0,100,0" VerticalAlignment="Center">Julien Samuel Eddy Guimez, Armando Albornoz, Rida Shaik</TextBlock>
+
+    </Grid>
+</Window>
