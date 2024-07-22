@@ -8,6 +8,7 @@ namespace MealMate
 {
     public class Recipe
     {
+        public double MatchPercentage { get; set; }
         public string Name { get; set; }
         public List<string> Ingredients { get; set; }
         public string Instructions { get; set; }

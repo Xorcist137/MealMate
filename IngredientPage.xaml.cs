@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Windows.Media.Animation;
 
 namespace MealMate
 {
@@ -21,6 +22,8 @@ namespace MealMate
     /// </summary>
     public partial class IngredientPage : Page
     {
+        private Dictionary<string, List<string>> allCategories;
+        private List<string> allIngredients;
         public IngredientPage()
         {
             InitializeComponent();
@@ -49,9 +52,152 @@ namespace MealMate
 
             return categories;
         }
+        private void SearchBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PerformSearch();
+            }
+        }
 
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSearch();
+        }
+
+        private void PerformSearch()
+        {
+            string searchTerm = SearchBox.Text.Trim().ToLower();
+            if (string.IsNullOrEmpty(searchTerm)) return;
+
+            var matchingIngredients = allIngredients.Where(i => i.ToLower().Contains(searchTerm)).ToList();
+
+            if (matchingIngredients.Count > 0)
+            {
+                ShowSearchResults(matchingIngredients);
+            }
+            else
+            {
+                MessageBox.Show("No matching ingredients found.", "Search Results", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void ShowSearchResults(List<string> ingredients)
+        {
+            var searchResultsWindow = new Window
+            {
+                Title = "Search Results",
+                Width = 300,
+                Height = 400,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            var listBox = new ListBox
+            {
+                ItemsSource = ingredients
+            };
+
+            listBox.SelectionChanged += (sender, e) =>
+            {
+                if (listBox.SelectedItem is string selectedIngredient)
+                {
+                    SelectIngredient(selectedIngredient);
+                    searchResultsWindow.Close();
+                }
+            };
+
+            searchResultsWindow.Content = listBox;
+            searchResultsWindow.ShowDialog();
+        }
+
+        private void SelectIngredient(string ingredient)
+        {
+            foreach (var contentBorder in FindVisualChildren<Border>(this).Where(b => b.Name.EndsWith("Content")))
+            {
+                if (contentBorder.Child is ScrollViewer scrollViewer && scrollViewer.Content is Grid grid)
+                {
+                    foreach (var checkBox in grid.Children.OfType<CheckBox>())
+                    {
+                        if (checkBox.Content.ToString() == ingredient)
+                        {
+                            checkBox.IsChecked = true;
+                            var categoryBorder = contentBorder.Parent as Border;
+                            if (categoryBorder != null)
+                            {
+                                categoryBorder.Visibility = Visibility.Visible;
+                                contentBorder.Visibility = Visibility.Visible;
+                            }
+
+                            // Highlight the selected ingredient
+                            var originalBackground = checkBox.Background;
+                            checkBox.Background = new SolidColorBrush(Colors.Yellow);
+
+                            // Scroll to the selected ingredient
+                            scrollViewer.ScrollToVerticalOffset(checkBox.TranslatePoint(new Point(0, 0), grid).Y);
+
+                            // Show subtle confirmation message
+                            ShowTemporaryMessage($"'{ingredient}' selected");
+
+                            // Reset the highlight after a delay
+                            var timer = new System.Windows.Threading.DispatcherTimer
+                            {
+                                Interval = TimeSpan.FromSeconds(2)
+                            };
+                            timer.Tick += (sender, e) =>
+                            {
+                                checkBox.Background = originalBackground;
+                                timer.Stop();
+                            };
+                            timer.Start();
+
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        private void ShowTemporaryMessage(string message)
+        {
+            var messageBox = new Border
+            {
+                Background = new SolidColorBrush(Color.FromArgb(200, 0, 0, 0)),
+                CornerRadius = new CornerRadius(5),
+                Padding = new Thickness(10),
+                HorizontalAlignment = HorizontalAlignment.Right,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(0, 10, 300, 0)
+            };
+
+            var messageText = new TextBlock
+            {
+                Text = message,
+                FontSize = 16,
+                Foreground = Brushes.White,
+                TextWrapping = TextWrapping.Wrap,
+            };
+
+            messageBox.Child = messageText;
+
+            Grid.SetRow(messageBox, 0);
+            Grid.SetColumnSpan(messageBox, 1);
+            MainGrid.Children.Add(messageBox);
+
+            var fadeOutAnimation = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                Duration = new Duration(TimeSpan.FromSeconds(2)),
+                BeginTime = TimeSpan.FromSeconds(1)
+            };
+
+            fadeOutAnimation.Completed += (s, e) => MainGrid.Children.Remove(messageBox);
+
+            messageBox.BeginAnimation(UIElement.OpacityProperty, fadeOutAnimation);
+        }
         private void PopulateCategories()
         {
+            allCategories = ParseCategoriesCSV("../../../Assets/categories.csv");
+            allIngredients = allCategories.SelectMany(c => c.Value).Distinct().OrderBy(i => i).ToList();
             var categories = ParseCategoriesCSV("../../../Assets/categories.csv");
             foreach (var category in categories)
             {
@@ -65,7 +211,7 @@ namespace MealMate
                     {
                         grid.ColumnDefinitions.Add(new ColumnDefinition());
                     }
-
+                    var sortedIngredients = category.Value.OrderBy(i => i).ToList();
                     var ingredientCount = category.Value.Count;
                     var itemsPerColumn = (int)Math.Ceiling(ingredientCount / 4.0);
 
@@ -79,7 +225,7 @@ namespace MealMate
                     {
                         var checkBox = new CheckBox
                         {
-                            Content = category.Value[i],
+                            Content = sortedIngredients[i],
                             Margin = new Thickness(10, 5, 0, 5),
                             FontSize = 18,
                             FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Assets/Fonts/#Playfair Display"),

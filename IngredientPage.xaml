@@ -41,15 +41,22 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="8*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Choose your ingredients" FontSize="36" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Foreground="#0A0909" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display"/>
-
+        <TextBlock Grid.Row="0" Text="Choose your ingredients" FontSize="36" Margin="0,-150,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Foreground="#0A0909" FontWeight="Bold" FontFamily="/Assets/Fonts/#Playfair Display"/>
+        <Border Grid.Row="0" Width="600" Height="60" Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="15">
+            
+        </Border>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="150,0,0,0">
+            <TextBox x:Name="SearchBox" Width="500" Height="60" FontSize="28" Margin="50,0,100,0" BorderThickness="0"
+             VerticalContentAlignment="Center" KeyUp="SearchBox_KeyUp" FontFamily="/Assets/Fonts/#Playfair Display"/>
+            <Button FontFamily="/Assets/Fonts/#Playfair Display" Content="Search" Width="100" Height="60" FontSize="28" FontWeight="Bold" Click="SearchButton_Click"/>
+        </StackPanel>
         <ScrollViewer Grid.Row="1" Margin="300,10,300,10">
             <StackPanel Margin="10">
                 <StackPanel Margin="10">

@@ -23,7 +23,7 @@ namespace MealMate
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<MealPlan> MyMealPlans { get; set; }
+        public List<MealPlan> MyMealPlans { get; set; } = new List<MealPlan>();
 
         public MainWindow()
         {

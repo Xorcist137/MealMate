@@ -21,6 +21,13 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Breakfast" FontSize="36" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Arrow" FontFamily="/Assets/Fonts/#Pacifico"/>
+        <TextBlock x:Name="LoadingMessage" Grid.Column="1"
+           Text="Loading results, please wait..." 
+           FontSize="20" 
+           FontWeight="Bold" 
+           HorizontalAlignment="Center" 
+           Visibility="Collapsed" 
+           Margin="0,20,0,20"/>
         <ScrollViewer Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
             <StackPanel x:Name="Breakfast_Recipes" Orientation="Horizontal"></StackPanel>
             

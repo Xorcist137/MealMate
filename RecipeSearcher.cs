@@ -92,9 +92,13 @@ namespace MealMate
             });
 
             return recipesWithMatchPercentage
-                .OrderByDescending(r => r.MatchPercentage > 0.9)
+                .OrderByDescending(r => r.MatchPercentage)  // Sort by match percentage in descending order
                 .Take(100)
-                .Select(r => r.Recipe)
+                .Select(r =>
+                {
+                    r.Recipe.MatchPercentage = r.MatchPercentage;  // Store the match percentage in the Recipe object
+                    return r.Recipe;
+                })
                 .ToList();
         }
     }

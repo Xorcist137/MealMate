@@ -7,6 +7,58 @@
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="MyMealPlans">
+    <Page.Resources>
+        <Style x:Key="DeleteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFDDDDDD"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CustomToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="#FFE02B00"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFE02B00"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -36,19 +88,21 @@
                FontFamily="/Assets/Fonts/#Playfair Display" HorizontalAlignment="Center"/>
 
             <RadioButton Content="Total Calories" Tag="Calories" Checked="SortOption_Checked" 
-                 FontSize="18" Margin="10,5" FontFamily="/Assets/Fonts/#Playfair Display"/>
+             FontSize="18" Margin="10,5" FontFamily="/Assets/Fonts/#Playfair Display"/>
             <RadioButton Content="Fat Content" Tag="Fat" Checked="SortOption_Checked" 
-                 FontSize="18" Margin="10,5" FontFamily="/Assets/Fonts/#Playfair Display"/>
+             FontSize="18" Margin="10,5" FontFamily="/Assets/Fonts/#Playfair Display"/>
             <RadioButton Content="Protein Content" Tag="Protein" Checked="SortOption_Checked" 
-                 FontSize="18" Margin="10,5" FontFamily="/Assets/Fonts/#Playfair Display"/>
+             FontSize="18" Margin="10,5" FontFamily="/Assets/Fonts/#Playfair Display"/>
             <RadioButton Content="Carbs Content" Tag="Carbs" Checked="SortOption_Checked" 
-                 FontSize="18" Margin="10,5" FontFamily="/Assets/Fonts/#Playfair Display"/>
-            <RadioButton Content="Number of Ingredients" Tag="Ingredients" Checked="SortOption_Checked" IsChecked="True"
-                 FontSize="18" Margin="10,5" FontFamily="/Assets/Fonts/#Playfair Display"/>
+             FontSize="18" Margin="10,5" FontFamily="/Assets/Fonts/#Playfair Display"/>
+            <RadioButton Content="Number of Ingredients" Tag="Ingredients" Checked="SortOption_Checked" 
+             FontSize="18" Margin="10,5" FontFamily="/Assets/Fonts/#Playfair Display"/>
 
             <ToggleButton x:Name="SortOrderToggle" Content="Ascending" Margin="10,20,10,10" 
-                  FontSize="18" FontFamily="/Assets/Fonts/#Playfair Display" IsChecked="True"
-                  Checked="SortOrderToggle_Checked" Unchecked="SortOrderToggle_Unchecked"/>
+              FontSize="18" FontFamily="/Assets/Fonts/#Playfair Display" IsChecked="True"
+              Checked="SortOrderToggle_Checked" Unchecked="SortOrderToggle_Unchecked"
+              Background="Transparent" BorderBrush="#FFE02B00"
+              Style="{StaticResource CustomToggleButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Page>
